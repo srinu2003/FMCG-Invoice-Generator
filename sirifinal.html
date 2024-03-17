@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Invoice</title>
+<style>
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+ <style>
+  .container {
+    display: flex;
+  }
+  .fieldset-wrapper {
+    flex: 1;
+    margin-right: 20px; /* Adjust spacing between fieldsets */
+  }
+
+
+        /* Add your CSS styling here */
+        /* Example: */
+       
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #71b8e4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4898c9;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Invoice Generator</h2>
+
+<form id="invoiceForm">
+<div class="container">
+  <div class="fieldset-wrapper">
+  <fieldset>
+    <legend><h3>From</h3></legend>
+    <div>
+      <label for="invoiceName">Company Name:</label>
+      <input type="text" id="invoiceName" name="invoiceName" required="">
+    </div>
+ <div>
+      <label for="invoiceName1">Company Address:</label>
+      <input type="text" id="invoiceName1" name="invoiceName1" required="">
+    </div>
+    <div>
+      <label for="contact">Phone Number:</label>
+      <input type="text" id="contact" name="contact" required="">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required="">
+    </div>
+    <div>
+      <label for="gst">GST Number:</label>
+ <input type="text" id="gst1" name="gst1" required="">
+         </div>
+  </fieldset>
+</div>
+
+
+  <div class="fieldset-wrapper">
+  <fieldset>
+    <legend><h3>Bill To</h3></legend>
+   
+ <div>
+      <label for="invoiceName2">Contact Person Name:</label>
+      <input type="text" id="invoiceName2" name="invoiceName2" required="">
+    </div>
+<div>
+      <label for="invoiceName3">Address:</label>
+      <input type="text" id="invoiceName3" name="invoiceName3" required="">
+    </div>
+
+    <div>
+      <label for="contact">Phone Number:</label>
+      <input type="text" id="contact" name="contact" required="">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required="">
+    </div>
+    <div>
+      <label for="gst1">GST Number:</label>
+      <input type="text" id="gst1" name="gst1" required="">
+
+          </div>
+  </fieldset>
+</div>
+</div>
+  <fieldset>
+    <legend><h3>Product Details</h3></legend>
+ 
+    <div id="products">
+      <div class="product">
+<div>
+</div><div>
+          </div><div>
+          </div><div>
+          </div><div>
+          </div><table>
+        <thead>
+            <tr>
+</tr><tr>
+      <th><label for="itemName">Product Name:</label></th>
+      <th><label for="quantity">Quantity:</label></th>
+      <th><label for="costPerQuantity">Price Excluding Tax:*</label></th>
+ <th><label for="costPerQuantity">Price Including Tax:</label></th>
+      <th><label for="tax">Tax Slab:</label></th>
+</tr>
+
+
+        <tr><td><input type="text" class="itemName" name="itemName" bachground-color="blue" required=""></td>
+
+        
+        <td><input type="number" class="quantity" name="quantity" required=""></td>
+
+        
+        <td><input type="number" step="0.01" class="costPerQuantity" name="costPerQuantity" required=""></td>
+          <td><input type="number" step="0.01" class="costPerQuantity1" name="costPerQuantity1"></td>
+        
+        <td><input type="number" step="0.01" class="tax" name="tax" required=""></td>
+        
+      
+
+
+    </tr>
+        </thead>
+        <tbody id="product-details">
+            <!-- Product details will be dynamically added here -->
+        </tbody>
+</table>
+
+  </div></div>
+    <br><button type="button" onclick="addProduct()">Add Product</button><br>
+    
+
+  </fieldset>
+
+  <div>
+    <br><button type="submit">Submit</button><br>
+<br>
+  </div>
+
+  <div>
+    <table>
+<thead>
+<tr>
+<th><h3><label>Total Cost:</label></h3></th>
+    <td><output id="totalCost">0.00</output></td>
+    </tr>
+</thead>
+</table>
+  </div>
+
+</form>
+<script>
+function addProduct() {
+  const productsDiv = document.getElementById('products');
+  const productDiv = document.createElement('div');
+  productDiv.classList.add('product');
+  productDiv.innerHTML = `
+<table>
+        <thead>
+            <tr>
+    <div>
+<tr>
+      <td><input type="text" class="itemName" name="itemName" required></td>
+    </div>
+    <div>
+      <td><input type="number" class="quantity" name="quantity" required></td>
+    </div>
+    <div>
+      <td><input type="number" step="0.01" class="costPerQuantity" name="costPerQuantity" required></td>
+          <td><input type="number" step="0.01" class="costPerQuantity1" name="costPerQuantity1"></td>
+    </div>
+    <div>
+      <td><input type="number" step="0.01" class="tax" name="tax" required></td>
+    </div></tr>
+</thead>
+</table>
+
+
+  `;
+  productsDiv.appendChild(productDiv);
+
+}
+
+document.getElementById('invoiceForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const items = document.querySelectorAll('.itemName');
+  const quantities = document.querySelectorAll('.quantity');
+  const costs = document.querySelectorAll('.costPerQuantity');
+  const taxes = document.querySelectorAll('.tax');
+
+  let totalCost = 0;
+  for (let i = 0; i < items.length; i++) {
+    const quantity = parseFloat(quantities[i].value);
+    const cost = parseFloat(costs[i].value);
+    const tax = parseFloat(taxes[i].value);
+    const totalTax = (cost * tax) / 100;
+    const totalCostWithTax = cost + totalTax;
+    totalCost += totalCostWithTax * quantity;
+  }
+
+  document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+});
+</script>
+
+
+
+</body></html>
